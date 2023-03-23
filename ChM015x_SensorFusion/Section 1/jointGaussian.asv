@@ -1,4 +1,4 @@
-function [mu, Sigma] = jointGaussian(mu_x,mu_r,A,b,sigma2_x,sigma2_r)
+function [mu, Sigma] = jointGaussian(mu_x,mu_r,sigma2_x,sigma2_r)
 %jointGaussian calculates the joint Gaussian density as defined
 %in problem 1.3a. 
 %
@@ -13,8 +13,9 @@ function [mu, Sigma] = jointGaussian(mu_x,mu_r,A,b,sigma2_x,sigma2_r)
 
 
 %Your code here
-A = [1 0;A b];
+A = [1 0;1 1];
+b = mu_r;
 mu_x = [mu_x;0];
 Sigma_x = blkdiag(sigma2_x,sigma2_r);
-[mu, Sigma] = affineGaussianTransform(mu_x, Sigma_x, A, mu_r);
+[mu, Sigma] = affineGaussianTransform(mu_x, Sigma_x, A, b);
 end
